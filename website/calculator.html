@@ -34,6 +34,7 @@
       margin-bottom: 10px;
     }
 
+    select,
     input[type="text"],
     input[type="number"] {
       border-radius: 5px;
@@ -64,13 +65,90 @@
       text-align: center;
       margin-top: 50px;
     }
+
+    nav {
+        display: flex;
+        justify-content: center;
+        background-color: #f2f2f2;
+        padding: 10px;
+    }
+    nav a {
+        color: #333;
+        text-decoration: none;
+        padding: 0 15px;
+    }
+    nav a:hover {
+        text-decoration: underline;
+    }
+    main {
+        padding: 20px;
+    }    
   </style>
 </head>
 <body>
-  <h1>Pet Health Score Calculator</h1>
+  <header>
+    <h1>Pawsitively Insured</h1>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="calculator.html">Insurance Calculator</a>
+        <a href="about.html">About Us</a>
+        <a href="testimonials.html">Testimonials</a>
+    </nav>
+  </header>  
+  <h2 style="text-align: center;">Pet Health Score Calculator</h2>
   <form id="pet-form">
     <label for="breed">Breed:</label>
-    <input type="text" id="breed" name="breed" required>
+    <select id="breed" name="breed" required>
+      <option value="" disabled selected>Select a breed</option>
+      <option value="labrador retriever">Labrador Retriever</option>
+      <option value="german shepherd">German Shepherd</option>
+      <option value="golden retriever">Golden Retriever</option>
+      <option value="bulldog">Bulldog</option>
+      <option value="beagle">Beagle</option>
+      <option value="french bulldog">French Bulldog</option>
+      <option value="poodle">Poodle</option>
+      <option value="rottweiler">Rottweiler</option>
+      <option value="yorkshire terrier">Yorkshire Terrier</option>
+      <option value="boxer">Boxer</option>
+      <option value="dachshund">Dachshund</option>
+      <option value="siberian husky">Siberian Husky</option>
+      <option value="doberman pinscher">Doberman Pinscher</option>
+      <option value="great dane">Great Dane</option>
+      <option value="australian shepherd">Australian Shepherd</option>
+      <option value="miniature schnauzer">Miniature Schnauzer</option>
+      <option value="shih tzu">Shih Tzu</option>
+      <option value="pembroke welsh corgi">Pembroke Welsh Corgi</option>
+      <option value="cavalier king charles">Cavalier King Charles</option>
+      <option value="boston terrier">Boston Terrier</option>
+      <option value="bernese mountain dog">Bernese Mountain Dog</option>
+      <option value="pomeranian">Pomeranian</option>
+      <option value="havanese">Havanese</option>
+      <option value="shetland sheepdog">Shetland Sheepdog</option>
+      <option value="brittanys">Brittanys</option>
+      <option value="weimaraner">Weimaraner</option>
+      <option value="bichon frise">Bichon Frise</option>
+      <option value="west highland white terrier">West Highland White Terrier</option>
+      <option value="vizsla">Vizsla</option>
+      <option value="maltese">Maltese</option>
+      <option value="border collie">Border Collie</option>
+      <option value="bullmastiff">Bullmastiff</option>
+      <option value="chihuahua">Chihuahua</option>
+      <option value="english springer spaniel">English Springer Spaniel</option>
+      <option value="dalmatian">Dalmatian</option>
+      <option value="australian cattle dog">Australian Cattle Dog</option>
+      <option value="newfoundland">Newfoundland</option>
+      <option value="staffordshire bull terrier">Staffordshire Bull Terrier</option>
+      <option value="cane corso">Cane Corso</option>
+      <option value="rhodesian ridgeback">Rhodesian Ridgeback</option>
+      <option value="scottish terrier">Scottish Terrier</option>
+      <option value="shiba inu">Shiba Inu</option>
+      <option value="irish setter">Irish Setter</option>
+      <option value="alaskan malamute">Alaskan Malamute</option>
+      <option value="lhasa apso">Lhasa Apso</option>
+      <option value="akita">Akita</option>
+      <option value="bloodhound">Bloodhound</option>
+      <option value="whippet">Whippet</option>
+    </select>      
     <label for="age">Age:</label>
     <input type="number" id="age" name="age" required>
     <button type="submit">Calculate</button>
