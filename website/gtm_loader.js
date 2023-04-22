@@ -8,7 +8,7 @@ console.log('gtm loader activated');
     j.async = true;
     j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
     f.parentNode.insertBefore(j, f);
-  })(window, document, "script", "dataLayer", "GTM-K5N4Z5F");
+  })(window, document, "script", "dataLayer", "GTM-TXSXX8W");
 
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
