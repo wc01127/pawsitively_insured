@@ -84,113 +84,116 @@
         padding: 20px;
     }    
   </style>
-</head>
-<body>
-  <header>
-    <h1>Pawsitively Insured</h1>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="calculator.html">Insurance Calculator</a>
-        <a href="about.html">About Us</a>
-        <a href="testimonials.html">Testimonials</a>
-    </nav>
-  </header>  
-  <div style="text-align:center;"><img src="corgi.jpeg" style="width:200px;margin-top:20px;" /></div>
-  <h2 style="text-align: center;">Pet Health Score Calculator</h2>
-  <div id="pet-form-container">
-    <form id="pet-form">
-      <label for="breed">Breed:</label>
-      <select id="breed" name="breed" required>
-        <option value="" disabled selected>Select a breed</option>
-        <option value="labrador retriever">Labrador Retriever</option>
-        <option value="german shepherd">German Shepherd</option>
-        <option value="golden retriever">Golden Retriever</option>
-        <option value="bulldog">Bulldog</option>
-        <option value="beagle">Beagle</option>
-        <option value="french bulldog">French Bulldog</option>
-        <option value="poodle">Poodle</option>
-        <option value="rottweiler">Rottweiler</option>
-        <option value="yorkshire terrier">Yorkshire Terrier</option>
-        <option value="boxer">Boxer</option>
-        <option value="dachshund">Dachshund</option>
-        <option value="siberian husky">Siberian Husky</option>
-        <option value="doberman pinscher">Doberman Pinscher</option>
-        <option value="great dane">Great Dane</option>
-        <option value="australian shepherd">Australian Shepherd</option>
-        <option value="miniature schnauzer">Miniature Schnauzer</option>
-        <option value="shih tzu">Shih Tzu</option>
-        <option value="pembroke welsh corgi">Pembroke Welsh Corgi</option>
-        <option value="cavalier king charles">Cavalier King Charles</option>
-        <option value="boston terrier">Boston Terrier</option>
-        <option value="bernese mountain dog">Bernese Mountain Dog</option>
-        <option value="pomeranian">Pomeranian</option>
-        <option value="havanese">Havanese</option>
-        <option value="shetland sheepdog">Shetland Sheepdog</option>
-        <option value="brittanys">Brittanys</option>
-        <option value="weimaraner">Weimaraner</option>
-        <option value="bichon frise">Bichon Frise</option>
-        <option value="west highland white terrier">West Highland White Terrier</option>
-        <option value="vizsla">Vizsla</option>
-        <option value="maltese">Maltese</option>
-        <option value="border collie">Border Collie</option>
-        <option value="bullmastiff">Bullmastiff</option>
-        <option value="chihuahua">Chihuahua</option>
-        <option value="english springer spaniel">English Springer Spaniel</option>
-        <option value="dalmatian">Dalmatian</option>
-        <option value="australian cattle dog">Australian Cattle Dog</option>
-        <option value="newfoundland">Newfoundland</option>
-        <option value="staffordshire bull terrier">Staffordshire Bull Terrier</option>
-        <option value="cane corso">Cane Corso</option>
-        <option value="rhodesian ridgeback">Rhodesian Ridgeback</option>
-        <option value="scottish terrier">Scottish Terrier</option>
-        <option value="shiba inu">Shiba Inu</option>
-        <option value="irish setter">Irish Setter</option>
-        <option value="alaskan malamute">Alaskan Malamute</option>
-        <option value="lhasa apso">Lhasa Apso</option>
-        <option value="akita">Akita</option>
-        <option value="bloodhound">Bloodhound</option>
-        <option value="whippet">Whippet</option>
-      </select>      
-      <label for="age">Age:</label>
-      <input type="number" id="age" name="age" required>
-      <button type="submit" id="calculator-button">Calculate</button>
-    </form>
-    <div id="result"></div>
-  </div>
   <script>
-    const form = document.getElementById('pet-form');
-    const resultDiv = document.getElementById('result');
-
-    form.addEventListener('submit', (event) => {
-      event.preventDefault();
-      const breedInput = document.getElementById('breed');
-      const ageInput = document.getElementById('age');
-      const breed = breedInput.value;
-      const age = ageInput.value;
-
-      const url = 'https://minttutorials.herokuapp.com/api/pawsitive/health-score/';
-      const data = {
-        breed: breed,
-        age: age,
-      };
-
-      fetch(url, {
-        method: 'POST',
-        body: JSON.stringify(data),
+    function calculateHealthScore() {
+      const breed = document.getElementById("breed").value;
+      const age = parseInt(document.getElementById("age").value);
+      
+      /*
+      fetch("/api/pawsitive/health-score/", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          age: age,
+          breed: breed
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        const healthScore = data.pet_health_score;
+        document.getElementById("result").innerHTML = `Your dog's health score is <div id="healthscore_number" style="display:inline-block">${healthScore}</div>.`;
+        })
+      .catch(error => console.error(error));
+      }
+    */
+    let api_url = "/api/pawsitive/health-score/"+breed+"/"+age+"/";
+    console.log(api_url);
+    fetch(api_url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
         }
       })
       .then(response => response.json())
       .then(data => {
-        const score = data.pet_health_score;
-        resultDiv.innerHTML = `Your pet's health score is: <div id="score">${score}</div>`;
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-    });
-  </script>
-<div style="text-align:center;font-size:12px;margin-top:20px;" "="">Sponsored by <a href="https://www.mintacademy.com">Mint Academy</a></div>  
-</body>
+        const healthScore = data.pet_health_score;
+        document.getElementById("result").innerHTML = `Your dog's health score is <div id="healthscore_number" style="display:inline-block">${healthScore}</div>.`;
+        })
+      .catch(error => console.error(error));
+    }
+  </script>  
+</head>
+ <body>
+    <div style="text-align: center;margin-bottom: 20px;">
+        <img src="https://cdn.pixabay.com/photo/2021/10/13/09/01/corgi-6705821__340.jpg" style="max-width: 200px;">
+    </div>
+    <div class="container">
+      <h1 class="text-center mb-5">Dog Health Score Calculator</h1>
+      <form>
+        <div class="mb-3">
+          <label class="form-label" for="breed">Breed:</label>
+          <select class="form-select" id="breed" name="breed">
+            <option value="">--Select Breed--</option>
+            <option value="1">labrador retriever</option>
+            <option value="2">german shepherd</option>
+            <option value="3">golden retriever</option>
+            <option value="4">bulldog</option>
+            <option value="5">beagle</option>
+            <option value="6">french bulldog</option>
+            <option value="7">poodle</option>
+            <option value="8">rottweiler</option>
+            <option value="9">yorkshire terrier</option>
+            <option value="10">boxer</option>
+            <option value="11">dachshund</option>
+            <option value="12">siberian husky</option>
+            <option value="13">doberman pinscher</option>
+            <option value="14">great dane</option>
+            <option value="15">australian shepherd</option>
+            <option value="16">miniature schnauzer</option>
+            <option value="17">shih tzu</option>
+            <option value="18">pembroke welsh corgi</option>
+            <option value="19">cavalier king charles</option>
+            <option value="20">boston terrier</option>
+            <option value="21">bernese mountain dog</option>
+            <option value="22">pomeranian</option>
+            <option value="23">havanese</option>
+            <option value="24">shetland sheepdog</option>
+            <option value="25">brittanys</option>
+            <option value="26">weimaraner</option>
+            <option value="27">bichon frise</option>
+            <option value="28">west highland white terrier</option>
+            <option value="29">vizsla</option>
+            <option value="30">maltese</option>
+            <option value="31">border collie</option>
+            <option value="32">bullmastiff</option>
+            <option value="33">chihuahua</option>
+            <option value="34">english springer spaniel</option>
+            <option value="35">dalmatian</option>
+            <option value="36">australian cattle dog</option>
+            <option value="37">newfoundland</option>
+            <option value="38">staffordshire bull terrier</option>
+            <option value="39">cane corso</option>
+            <option value="40">rhodesian ridgeback</option>
+            <option value="41">scottish terrier</option>
+            <option value="42">shiba inu</option>
+            <option value="43">irish setter</option>
+            <option value="44">alaskan malamute</option>
+            <option value="45">lhasa apso</option>
+            <option value="46">akita</option>
+            <option value="47">bloodhound</option>
+            <option value="48">whippet</option>            
+          </select>        
+        </div>
+        
+        <div class="mb-3" style="margin-top:20px;">
+          <label class="form-label" for="age">Age:</label>
+          <input class="form-control" type="number" id="age" name="age">
+        </div>
+        <button class="btn btn-primary" type="button" onclick="calculateHealthScore()">Calculate</button>
+      </form>
+      <div id="result"></div>
+    </div>
+  </body>
 </html>
