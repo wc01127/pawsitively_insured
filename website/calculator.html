@@ -90,26 +90,8 @@
       const breed = document.getElementById("breed").value;
       const age = parseInt(document.getElementById("age").value);
       
-      /*
-      fetch("/api/pawsitive/health-score/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          age: age,
-          breed: breed
-        })
-      })
-      .then(response => response.json())
-      .then(data => {
-        const healthScore = data.pet_health_score;
-        document.getElementById("result").innerHTML = `Your dog's health score is <div id="healthscore_number" style="display:inline-block">${healthScore}</div>.`;
-        })
-      .catch(error => console.error(error));
-      }
-    */
-    let api_url = "/api/pawsitive/health-score/"+breed+"/"+age+"/";
+
+    let api_url = "http://tutorials.mintacademy.com/api/pawsitive/health-score/"+breed+"/"+age+"/";
     console.log(api_url);
     fetch(api_url, {
         method: "GET",
